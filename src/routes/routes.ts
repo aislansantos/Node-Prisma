@@ -1,9 +1,8 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import * as ApiControler from "@/controllers/api.controller";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.send("teste");
-});
+router.get("/", ApiControler.ping);
 
 export default router;
