@@ -1,5 +1,5 @@
-import { prisma } from "@/libs/prisma";
 import { Request, Response } from "express";
+import * as UserService from "@/services/userService";
 
 export const ping = (req: Request, res: Response) => {
   return res.send("teste");
@@ -10,11 +10,14 @@ export const teste = (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  const user = await prisma.user.create({
-    data: {
-      name: "Aislan Santos",
-      email: "aislan.santos@gmail.com",
-    },
+  // validar os dados recebidos.
+  const user = await UserService.createUser({
+    name: "Teste1",
+    email: "teste1@hotmail.com",
   });
-  return res.json({ user });
+
+  if (user) {
+    return res.status(201).json({ user });
+  }
+  return res.status(500).json({ Error: "E-mail ja cadastrado." });
 };
