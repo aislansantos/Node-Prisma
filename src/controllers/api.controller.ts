@@ -12,12 +12,23 @@ export const teste = (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   // validar os dados recebidos.
   const user = await UserService.createUser({
-    name: "Teste1",
-    email: "teste1@hotmail.com",
+    name: "Teste3",
+    email: "teste3@hotmail.com",
   });
 
   if (user) {
     return res.status(201).json({ user });
   }
   return res.status(500).json({ Error: "E-mail ja cadastrado." });
+};
+
+export const createUsers = async (req: Request, res: Response) => {
+  const result = await UserService.createUsers([
+    { name: "João", email: "joao@gmail.com" },
+    { name: "João Paulo", email: "joaopaulo@gmail.com" },
+    { name: "José", email: "jose@gmail.com" },
+    { name: "Maria", email: "maria@hotmail" },
+  ]);
+
+  res.json({ result });
 };
