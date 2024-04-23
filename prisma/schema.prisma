@@ -7,9 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id    Int    @id @default(autoincrement())
   status Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt //função própria para update
+  role Role @default(USER)
   name  String
   email String @unique
+  posts Post[] // Mostra a relação que um usuário pode ter vários posts
+
+  @@map("users")
+}
+
+model Post {
+  id Int  @id @default(autoincrement())
+  title String
+  body String
+  subtitle String? // objeto opcional 
+  userId Int
+  author User @relation(fields: [userId], references: [id]) // Mostra relação que o post só pode ter um autor.
+
+
+  @@map("posts")
 }
