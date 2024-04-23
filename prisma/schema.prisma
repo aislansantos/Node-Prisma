@@ -33,6 +33,5 @@ model Post {
   userId Int
   author User @relation(fields: [userId], references: [id]) // Mostra relação que o post só pode ter um autor.
 
-
   @@map("posts")
 }
