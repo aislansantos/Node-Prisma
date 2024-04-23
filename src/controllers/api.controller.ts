@@ -12,8 +12,14 @@ export const teste = (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   // validar os dados recebidos.
   const user = await UserService.createUser({
-    name: "Teste3",
-    email: "teste3@hotmail.com",
+    name: "Teste 4",
+    email: "teste4@hotmail.com",
+    posts: {
+      create: {
+        title: "Titulo de teste do teste 4",
+        body: "Corpo de teste do post",
+      },
+    },
   });
 
   if (user) {
